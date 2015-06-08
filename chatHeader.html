@@ -1,0 +1,21 @@
+<div>
+  <h1>Angular Chat</h1>
+  <h5><i></i> using Bootstrap and PubNub</h5>
+  <p>&nbsp;</p>
+  <div ng-show="realtimeStatus == 0">
+    <span><i></i> Disconnected</span>
+  </div>
+  <div ng-show="realtimeStatus == 1">
+    <span><i></i> Connecting...</span>
+  </div>
+  <div ng-show="realtimeStatus == 2">
+    <span><i></i> Connected</span>
+  </div>
+  <div ng-show="loggedIn" id="logout">
+    <span ng-click="attemptLogout()"><i></i> Logout</span>
+  </div>
+</div>
+<p>&nbsp;</p>
+<div ng-show="errorMsg">
+  <i></i> <b>Error:</b> {{errorMsg}}
+</div>
