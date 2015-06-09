@@ -60,7 +60,7 @@ function chatCtrl($scope, $http) {
     }, function(messages) {
       // Shows All Messages
       $scope.$apply(function(){
-        $scope.chatMessages = messages.push();          
+        $scope.chatMessages = messages;          
       }); 
     });
    }
