@@ -40,7 +40,7 @@
                   <span><h2 class="text-info">Connecting...</h2></span>
                 </div>
                 <div ng-show="realtimeStatus == 2">
-                  <span><h2 class="text-success">Connection Successful</h2></span>
+                  <span><h2 class="text-success">Connction Successful</h2></span>
                 </div>
                 <div class="alert alert-dismissible alert-info">
                   <button type="button" class="close" data-dismiss="alert">×</button>
@@ -82,17 +82,11 @@
                   
                     <p id="temp" style="color:#DE935D"><b>{{chat.username}}</b></p>
                      <script type="text/javascript"> 
-                        if({{chat.username}} == {{message.username}})
+                        if(chat.username == message.username)
                         {
                           document.getElementById("temp").style.color = "#35D484";
                         }
-                          
-
                      </script> 
-                  
-                  
-                      
-
                         <small class="text-muted">
                          {{chat.date}} </br> {{chat.time}}
                         </small>
