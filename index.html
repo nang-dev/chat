@@ -33,12 +33,6 @@
                 <div ng-show="realtimeStatus == 2">
                   <span><h2 class="text-success">Successfully Connected</h2></span>
                 </div>
-                </br>
-                <div class="alert alert-dismissible alert-info">
-                  <button type="button" class="close" data-dismiss="alert">×</button>
-                  Most Recent Messages Will Appear at the Top of the Chat Box
-                </div>
-                
                
                 <div ng-show="loggedIn" id="logout">
                   <span ng-click="attemptLogout()"><a class="btn btn-warning">Log Out</a></span>
@@ -48,10 +42,6 @@
               <div ng-show="errorMsg">
                 <i></i> <h3>Error: {{errorMsg}}</h3>
               </div>
-            
-            
-            
-            
             
             
             <div ng-Show="!loggedIn" id="login">
@@ -68,7 +58,12 @@
               </div>
 
             </div>
+            <div class="alert alert-dismissible alert-info">
+                  <button type="button" class="close" data-dismiss="alert">×</button>
+                  Most Recent Messages Will Appear at the Top of the Chat Box
+           </div>
             <div ng-Show="loggedIn" id="chat">
+                
               <table>
                 <tr ng-repeat="chat in chatMessages">
                     <td>
