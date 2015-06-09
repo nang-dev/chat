@@ -24,7 +24,7 @@ function chatCtrl($scope, $http) {
    ***/
   $scope.chatChannel = "angular_chat";
   $scope.messageLimit = 50;
-  $scope.defaultUsername = "";
+  $scope.defaultUsername = "Guest";
 
   /***
    * Static global variables
@@ -60,7 +60,7 @@ function chatCtrl($scope, $http) {
     }, function(messages) {
       // Shows All Messages
       $scope.$apply(function(){
-        $scope.chatMessages = messages;          
+        $scope.chatMessages = messages.reverse();          
       }); 
     });
    }
