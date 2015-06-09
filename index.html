@@ -19,6 +19,34 @@
               <h1>Nathan's Chat Server</h1>
               <p>Using AngularJS and PubNub</p>
             </div>
+            
+            
+            <div>
+
+                <p>&nbsp;</p>
+                <div ng-show="realtimeStatus == 0">
+                 <span><h2 class="text-danger">Disconnected...</h2></span>
+                </div>
+                <div ng-show="realtimeStatus == 1">
+                  <span><h2 class="text-info">Connecting...</h2></span>
+                </div>
+                <div ng-show="realtimeStatus == 2">
+                  <span><h2 class="text-success">Successfully Connected</h2></span>
+                </div>
+                <div ng-show="loggedIn" id="logout">
+                  <span ng-click="attemptLogout()"><i></i> Logout</span>
+                </div>
+              </div>
+              <p>&nbsp;</p>
+              <div ng-show="errorMsg">
+                <i></i> <b>Error:</b> {{errorMsg}}
+</div>
+            
+            
+            
+            
+            
+            
             <div ng-Show="!loggedIn" id="login">
               <h2>Login</h2>
               
@@ -61,7 +89,7 @@
             </form>
             
       
-            
+
             
    
           </div>
