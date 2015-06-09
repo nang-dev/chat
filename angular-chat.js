@@ -141,7 +141,7 @@ function chatCtrl($rootScope, $http) {
     callback   : function(message) { 
       //update messages with the new message
       $rootScope.$apply(function(){
-        $rootScope.chatMessages.push(message);          
+        $rootScope.chatMessages.unshift(message);          
       }); 
     },
 
