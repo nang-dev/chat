@@ -34,7 +34,7 @@
 
                 <p>&nbsp;</p>
                 <div ng-show="realtimeStatus == 0">
-                 <span><h2 class="text-danger">Dsconnected...</h2></span>
+                 <span><h2 class="text-danger">Disconnected...</h2></span>
                 </div>
                 <div ng-show="realtimeStatus == 1">
                   <span><h2 class="text-info">Connecting...</h2></span>
@@ -86,7 +86,7 @@
                   
                     <b id="temp" style="color:#DE935D">qqq</b></br>
                       <script type="text/javascript"> 
-                          var a = {{message.username}};
+                          var a = chat.username;
                           
                           document.getElementById("temp").innerHTML = a;
 
