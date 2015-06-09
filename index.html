@@ -34,7 +34,7 @@
 
                 <p>&nbsp;</p>
                 <div ng-show="realtimeStatus == 0">
-                 <span><h2 class="text-danger">Disconnected...</h2></span>
+                 <span><h2 class="text-danger">Dsconnected...</h2></span>
                 </div>
                 <div ng-show="realtimeStatus == 1">
                   <span><h2 class="text-info">Connecting...</h2></span>
@@ -61,13 +61,13 @@
               <div class="form-group">
                 <label class="control-label" for="username">Username</label>
                 <div class="input-group">
-                  <input type="text" class="form-control" id="txtSearch" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch1').click()" ng-model="message.username"/>
+                  <input type="text" class="form-control" id="txtSearch1" ng-model="message.username" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch1').click()" >
                   
                   
 
                   
                   <span class="input-group-btn" ng-click="attemptLogin()">
-                    <button class="btn btn-success" type="button id="btnSearch1">Go Chat</button>
+                    <button class="btn btn-success" type="button" id="btnSearch1">Go Chat</button>
                   </span>
                 </div>
               </div>
