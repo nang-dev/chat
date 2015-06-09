@@ -34,12 +34,12 @@
                   <span><h2 class="text-success">Successfully Connected</h2></span>
                 </div>
                 <div ng-show="loggedIn" id="logout">
-                  <span ng-click="attemptLogout()"><i></i> Logout</span>
+                  <span ng-click="attemptLogout()"><a class="btn btn-warning">Warning</a></span>
                 </div>
               </div>
               <p>&nbsp;</p>
               <div ng-show="errorMsg">
-                <i></i> <b>Error:</b> {{errorMsg}}
+                <i></i> <h3>Error: {{errorMsg}}</h3>
 </div>
             
             
