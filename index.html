@@ -27,16 +27,11 @@
                 <div class="input-group">
                   <input type="text" class="form-control" ng-model="message.username">
                   <span class="input-group-btn" ng-click="attemptLogin()">
-                    <button class="btn btn-default" type="button">Go Chat</button>
+                    <button class="btn btn-success" type="button">Go Chat</button>
                   </span>
                 </div>
               </div>
-              
-              
-      
-              <span ng-click="attemptLogin()">
-                <a class="btn btn-success">Go Chat</a>
-              </span>
+
             </div>
             <div ng-Show="loggedIn" id="chat">
               <table>
@@ -55,13 +50,19 @@
               </table>
             </div>
             <form ng-Show="loggedIn" ui-keypress="{13:'postMessage()'}">
-              <div id="inputMessage">
-                <input type="text" placeholder="Say hello!" ng-model="message.text" />
-                <span ng-click="postMessage()">
-                  <i></i> Post
-                </span>
+              <div class="form-group">
+                <div id="inputMessage" class="input-group">
+                  <input type="text" class="form-control" placeholder="Type Message Here" ng-model="message.text">
+                  <span class="input-group-btn" ng-click="postMessage()">
+                    <button class="btn btn-success" type="button">Send</button>
+                  </span>
+                </div>
               </div>
             </form>
+            
+      
+            
+            
    
           </div>
        </div>
