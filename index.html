@@ -78,7 +78,7 @@
                 <tr ng-repeat="chat in chatMessages">
                     <td>
                         <script> 
-                          if ({{message.username}} == {{chat.username}}) 
+                          if (message.username == chat.username) 
                           { 
                             
                              document.write("<b class="text-warning"><strong>{{chat.username}}</strong></b><br/> ")
