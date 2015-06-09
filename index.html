@@ -2,7 +2,7 @@
 <html ng-app="angular_chat">
   <head>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.js"></script>
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.4.0.js"></script>
     <div pub-key="pub-c-bc1da37d-273c-435a-9a21-a985367403dc" sub-key="sub-c-bfc0aa26-0e32-11e5-a5c2-0619f8945a4f" ssl="off" origin="pubsub.pubnub.com" id="pubnub"></div>
     <script src="http://cdn.pubnub.com/pubnub-3.1.min.js"></script>
@@ -10,7 +10,7 @@
      <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="bootstrap.css">
 
-<script src="jquery-1.11.3.min.js"></script>
+  <script src="jquery-1.11.3.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="jquery.js"></script>
     <meta charset="utf-8">
@@ -44,14 +44,6 @@
                 </div>
                 
 
-                
-                
-                <div class="alert alert-dismissible alert-info">
-                  <button type="button" class="close" data-dismiss="alert">×</button>
-                  Most Recent Messages Will Appear at the Top of the Chat Box
-               </div>
-
-              
                
                 <div ng-show="loggedIn" id="logout">
                   <span ng-click="attemptLogout()"><a class="btn btn-warning">Log Out</a></span>
@@ -70,8 +62,13 @@
                 <label class="control-label" for="username">Username</label>
                 <div class="input-group">
                   <input type="text" class="form-control" ng-model="message.username">
+                  
+                  
+                  <input type="text" id="txtSearch" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch1').click()"/>
+
+                  
                   <span class="input-group-btn" ng-click="attemptLogin()">
-                    <button class="btn btn-success" type="button">Go Chat</button>
+                    <button class="btn btn-success" type="button id="btnSearch1">Go Chat</button>
                   </span>
                 </div>
               </div>
@@ -84,10 +81,9 @@
                 <tr ng-repeat="chat in chatMessages">
                     <td>
                   
-                    <b id="temp" style="color:#DE935D">{{chat.username}}</b></br>
+                    <b id="temp">{{chat.username}}</b></br>
                       <script type="text/javascript"> 
-                          var b = {{chat.username}};
-                         document.write("<b>b</b>");
+                     
 
                      </script>
                         <small class="text-muted">
@@ -108,9 +104,9 @@
             <form ng-Show="loggedIn" ui-keypress="{13:'postMessage()'}">
               <div class="form-group">
                 <div id="inputMessage" class="input-group">
-                  <input type="text" class="form-control" placeholder="Type Message Here" ng-model="message.text">
+                  <input type="text" class="form-control" placeholder="Type Message Here" ng-model="message.text" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch2').click()">
                   <span class="input-group-btn" ng-click="postMessage()">
-                    <button class="btn btn-success" type="button">Send</button>
+                    <button class="btn btn-success" type="button" id="btnSearch2">Send</button>
                   </span>
                 </div>
               </div>
