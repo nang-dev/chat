@@ -14,46 +14,50 @@
   <div class='container-fluid' ng-controller="chatCtrl">
     <div class = "container">
         <div class = "row">
-          <div class = "col-lg-14">
-    <div ng-Show="!loggedIn" id="login">
-      <h2>Login</h2>
-      <label for="username">
-        <b>Username:</b>
-      </label>
-      <label>
-        <input type="text" ng-model="message.username" />
-      </label>
-      <span ng-click="attemptLogin()">
-        <a class="btn btn-success">Go Chat</a>
-      </span>
-    </div>
-    <div ng-Show="loggedIn" id="chat">
-      <table>
-        <tr ng-repeat="chat in chatMessages">
-            <td style="width: 30%;">
-              <b>{{chat.username}}</b><br/>
-              <small>
-              {{chat.time}}
-              </small>
-            </td>
-            <td colspan="2">{{chat.text}}</td>
-        </tr>
-        <tr ng-show="chatMessages.length == 0">
-          <td colspan="3">No messages yet!</td>
-        </tr>
-      </table>
-    </div>
-    <form ng-Show="loggedIn" ui-keypress="{13:'postMessage()'}">
-      <div id="inputMessage">
-        <input type="text" placeholder="Say hello!" ng-model="message.text" />
-        <span ng-click="postMessage()">
-          <i></i> Post
-        </span>
-      </div>
-    </form>
+          <div class = "col-lg-16">
+            <div class="jumbotron">
+              <h1>Nathan's Chat Server</h1>
+              <p>Using AngularJS and PubNub</p>
+            </div>
+            <div ng-Show="!loggedIn" id="login">
+              <h2>Login</h2>
+              <label for="username">
+                <b>Username:</b>
+              </label>
+              <label>
+                <input type="text" ng-model="message.username" />
+              </label>
+              <span ng-click="attemptLogin()">
+                <a class="btn btn-success">Go Chat</a>
+              </span>
+            </div>
+            <div ng-Show="loggedIn" id="chat">
+              <table>
+                <tr ng-repeat="chat in chatMessages">
+                    <td style="width: 30%;">
+                      <b>{{chat.username}}</b><br/>
+                      <small>
+                      {{chat.time}}
+                      </small>
+                    </td>
+                    <td colspan="2">{{chat.text}}</td>
+                </tr>
+                <tr ng-show="chatMessages.length == 0">
+                  <td colspan="3">No messages yet!</td>
+                </tr>
+              </table>
+            </div>
+            <form ng-Show="loggedIn" ui-keypress="{13:'postMessage()'}">
+              <div id="inputMessage">
+                <input type="text" placeholder="Say hello!" ng-model="message.text" />
+                <span ng-click="postMessage()">
+                  <i></i> Post
+                </span>
+              </div>
+            </form>
    
-  </div>
-      </div>
+          </div>
+       </div>
       </div>
   </body>
 </html>
