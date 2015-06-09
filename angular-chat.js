@@ -17,50 +17,50 @@ angular.module('angular_chat', ['ui.bootstrap']);
  * Precondition: none
  * Postcondition: chat logs have been loaded
  ***/
-function chatCtrl($scope, $http) { 
+function chatCtrl($rootScope, $http) { 
 
   /***
    * Configurable global variables
    ***/
-  $scope.chatChannel = "angular_chat";
-  $scope.messageLimit = 50;
-  $scope.defaultUsername = "";
+  $rootScope.chatChannel = "angular_chat";
+  $rootScope.messageLimit = 50;
+  $rootScope.defaultUsername = "";
 
   /***
    * Static global variables
    ***/
-  $scope.loggedIn = false;
-  $scope.errorMsg;
-  $scope.realtimeStatus = 0;
+  $rootScope.loggedIn = false;
+  $rootScope.errorMsg;
+  $rootScope.realtimeStatus = 0;
 
   /***
    * Purpose: clear the message object
    * Precondition: none
    * Postcondition: message object has been reset
    ***/
-  $scope.clearMsg = function() {
-    $scope.message = {
-      username: $scope.defaultUsername,
+  $rootScope.clearMsg = function() {
+    $rootScope.message = {
+      username: $rootScope.defaultUsername,
       email: 'n/a',
       text: ''
     };
   }
 
-  $scope.clearMsg();
+  $rootScope.clearMsg();
 
   /***
    * Purpose: load the existing chat logs
    * Precondition: none
    * Postcondition: chat logs have been loaded
    ***/
-  $scope.chatLogs = function() {
+  $rootScope.chatLogs = function() {
     PUBNUB.history( {
-      channel : $scope.chatChannel,
-      limit   : $scope.messageLimit
+      channel : $rootScope.chatChannel,
+      limit   : $rootScope.messageLimit
     }, function(messages) {
       // Shows All Messages
-      $scope.$apply(function(){
-        $scope.chatMessages = messages;          
+      $rootScope.$apply(function(){
+        $rootScope.chatMessages = messages;          
       }); 
     });
    }
@@ -70,20 +70,20 @@ function chatCtrl($scope, $http) {
    * Precondition: none
    * Postcondition: chat logs have been loaded
    ***/
-   $scope.attemptLogin = function() {
-    $scope.errorMsg = "";
+   $rootScope.attemptLogin = function() {
+    $rootScope.errorMsg = "";
 
-    if (!$scope.message.username) {
-      $scope.errorMsg = "You must enter a username.";
+    if (!$rootScope.message.username) {
+      $rootScope.errorMsg = "You must enter a username.";
       return;
     }
 
-    if (!$scope.realtimeStatus) {
-      $scope.errorMsg = "You're not connect to PubNub.";
+    if (!$rootScope.realtimeStatus) {
+      $rootScope.errorMsg = "You're not connect to PubNub.";
       return;
     }
 
-    $scope.loggedIn = true;
+    $rootScope.loggedIn = true;
    }
 
   /***
@@ -91,10 +91,10 @@ function chatCtrl($scope, $http) {
    * Precondition: none
    * Postcondition: error message class removed from message input
    ***/
-  $scope.$watch('message.text', function(newValue, oldValue) {
+  $rootScope.$watch('message.text', function(newValue, oldValue) {
     if (newValue)
       $("#inputMessage").removeClass("error");
-      $scope.errorMsg = "";
+      $rootScope.errorMsg = "";
   }, true);
 
   /***
@@ -102,32 +102,32 @@ function chatCtrl($scope, $http) {
    * Precondition: loggedIn
    * Postcondition: message added to chatMessages and sent to chatLog
    ***/
-  $scope.postMessage = function() {
+  $rootScope.postMessage = function() {
 
     //make sure they are logged in
-    if (!$scope.loggedIn) {
-      $scope.errorMsg = "You must login first.";
+    if (!$rootScope.loggedIn) {
+      $rootScope.errorMsg = "You must login first.";
       return;
     }
 
     //make sure they enter a chat message
-    if (!$scope.message.text) {
-      $scope.errorMsg = "You must enter a message.";
+    if (!$rootScope.message.text) {
+      $rootScope.errorMsg = "You must enter a message.";
       $("#inputMessage").addClass("error");
       return;
     }
 
     //set the message date
     d = new Date();
-    $scope.message.date = d.getDay() + "/" + d.getMonth() + "/" + d.getFullYear();
-    $scope.message.time = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+    $rootScope.message.date = d.getDay() + "/" + d.getMonth() + "/" + d.getFullYear();
+    $rootScope.message.time = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
 
    PUBNUB.publish({
-      channel : $scope.chatChannel,
-      message : $scope.message
+      channel : $rootScope.chatChannel,
+      message : $rootScope.message
     });
 
-    $scope.message.text = "";
+    $rootScope.message.text = "";
   };
 
   /***
@@ -136,36 +136,36 @@ function chatCtrl($scope, $http) {
    * Postconditions: pubnub is waiting and ready
    ***/
   PUBNUB.subscribe({
-    channel    : $scope.chatChannel,
+    channel    : $rootScope.chatChannel,
     restore    : false, 
     callback   : function(message) { 
       //update messages with the new message
-      $scope.$apply(function(){
-        $scope.chatMessages.unshift(message);          
+      $rootScope.$apply(function(){
+        $rootScope.chatMessages.unshift(message);          
       }); 
     },
 
     error      : function(data) {
-      $scope.errorMsg = data;
+      $rootScope.errorMsg = data;
     },
 
     disconnect : function() {   
-      $scope.$apply(function(){
-        $scope.realtimeStatus = 0;
+      $rootScope.$apply(function(){
+        $rootScope.realtimeStatus = 0;
       });
     },
 
     reconnect  : function() {   
-      $scope.$apply(function(){
-        $scope.realtimeStatus = 1;
+      $rootScope.$apply(function(){
+        $rootScope.realtimeStatus = 1;
       });
     },
 
     connect    : function() {
-      $scope.$apply(function(){
-        $scope.realtimeStatus = 2;
+      $rootScope.$apply(function(){
+        $rootScope.realtimeStatus = 2;
         //load the chat logs
-        $scope.chatLogs();
+        $rootScope.chatLogs();
       });
     }
   });
@@ -175,9 +175,9 @@ function chatCtrl($scope, $http) {
    * Precondition: loggedIn
    * Postcondition: message added to chatMessages and sent to chatLog
    ***/
-  $scope.attemptLogout = function() {
+  $rootScope.attemptLogout = function() {
     $("#inputMessage").removeClass("error");
-    $scope.clearMsg();
-    $scope.loggedIn = false;
+    $rootScope.clearMsg();
+    $rootScope.loggedIn = false;
   }
 }
