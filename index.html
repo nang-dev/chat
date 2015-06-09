@@ -40,7 +40,7 @@
               <p>&nbsp;</p>
               <div ng-show="errorMsg">
                 <i></i> <h3>Error: {{errorMsg}}</h3>
-</div>
+              </div>
             
             
             
@@ -65,15 +65,15 @@
               <table>
                 <tr ng-repeat="chat in chatMessages">
                     <td>
-                        <b>{{chat.username}}</b><br/>
-                        <small>
+                        <b class="text-success">{{chat.username}}</b><br/>
+                        <small class="text-muted">
                          {{chat.date}} </br> {{chat.time}}
                         </small>
                     </td>
                     <td>
                       <p>      </p>
                     </td>
-                      <td colspan="2">{{chat.text}}</td>
+                      <td colspan="2" class="text-primary">{{chat.text}}</td>
                    
                 </tr>
                 <tr ng-show="chatMessages.length == 0">
