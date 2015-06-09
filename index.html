@@ -12,7 +12,9 @@
   </head>
   <body>
   <div class='container-fluid' ng-controller="chatCtrl">
-    <div ng-include="'chatHeader.html'"></div>
+    <div class = "container">
+        <div class = "row">
+          <div class = "col-lg-14">
     <div ng-Show="!loggedIn" id="login">
       <h2>Login</h2>
       <label for="username">
@@ -22,7 +24,7 @@
         <input type="text" ng-model="message.username" />
       </label>
       <span ng-click="attemptLogin()">
-        <i></i> Go Chat
+        <a class="btn btn-success">Go Chat</a>
       </span>
     </div>
     <div ng-Show="loggedIn" id="chat">
@@ -49,7 +51,9 @@
         </span>
       </div>
     </form>
-    <div ng-include="'chatFooter.html'"></div>
+   
   </div>
+      </div>
+      </div>
   </body>
 </html>
