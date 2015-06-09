@@ -34,7 +34,7 @@
                   <span><h2 class="text-success">Successfully Connected</h2></span>
                 </div>
                 <div ng-show="loggedIn" id="logout">
-                  <span ng-click="attemptLogout()"><a class="btn btn-warning">Warning</a></span>
+                  <span ng-click="attemptLogout()"><a class="btn btn-warning">Log Out</a></span>
                 </div>
               </div>
               <p>&nbsp;</p>
@@ -67,7 +67,7 @@
                     <td style="width: 60%;">
                       <b>{{chat.username}}</b><br/>
                       <small>
-                      @{{chat.time}}
+                      {{chat.time}}
                       </small>
                     </td>
                     <td colspan="10">{{chat.text}}</td>
