@@ -21,12 +21,19 @@
             </div>
             <div ng-Show="!loggedIn" id="login">
               <h2>Login</h2>
-              <label for="username">
-                <b>Username:</b>
-              </label>
-              <label>
-                <input type="text" ng-model="message.username" />
-              </label>
+              
+              <div class="form-group">
+                <label class="control-label" for="username">Username</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" ng-model="message.username">
+                  <span class="input-group-btn" ng-click="attemptLogin()">
+                    <button class="btn btn-default" type="button">Go Chat</button>
+                  </span>
+                </div>
+              </div>
+              
+              
+      
               <span ng-click="attemptLogin()">
                 <a class="btn btn-success">Go Chat</a>
               </span>
