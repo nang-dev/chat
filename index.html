@@ -46,15 +46,8 @@
                   <button type="button" class="close" data-dismiss="alert">×</button>
                   Most Recent Messages Will Appear at the Top of the Chat Box
                </div>
-               <p id="temp" style="color:red">hello</p>
-                     <script type="text/javascript"> 
-                        
-                      document.getElementById("temp").style.color = "#C0DB6E";
-                      document.getElementById('temp').innerHTML = "bye";
-                          
 
-                          </script> 
-               
+              
                
                 <div ng-show="loggedIn" id="logout">
                   <span ng-click="attemptLogout()"><a class="btn btn-warning">Log Out</a></span>
@@ -87,9 +80,19 @@
                 <tr ng-repeat="chat in chatMessages">
                     <td>
                   
+                    <p>id="temp" style="color:#DE935D"><b>{{chat.username}}</b></p>
+                     <script type="text/javascript"> 
+                        if({{chat.username}} == {{message.username}})
+                        {
+                          document.getElementById("temp").style.color = "#35D484";
+                        }
+                          
+
+                     </script> 
+                  
+                  
                       
-                        <b class="text-success"><strong>{{message.username}}</strong></b><br/>
-                        
+
                         <small class="text-muted">
                          {{chat.date}} </br> {{chat.time}}
                         </small>
