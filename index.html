@@ -65,11 +65,11 @@
               <table>
                 <tr ng-repeat="chat in chatMessages">
           
-                      <p><strong>{{chat.username}}:</strong><p>    {{chat.text}}</p>
-                      </br>
-                      <small>
-                      {{chat.time}}
-                      </small>
+                        <b>{{chat.username}}</b><br/>
+                        <small>
+                         {{chat.date}} @ {{chat.time}}
+                        </small>
+                      <td colspan="2">{{chat.text}}</td>
                    
                 </tr>
                 <tr ng-show="chatMessages.length == 0">
