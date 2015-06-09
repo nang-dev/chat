@@ -64,11 +64,15 @@
             <div ng-Show="loggedIn" id="chat">
               <table>
                 <tr ng-repeat="chat in chatMessages">
-          
+                    <td>
                         <b>{{chat.username}}</b><br/>
                         <small>
-                         {{chat.date}} @ {{chat.time}}
+                         {{chat.date}} </br> {{chat.time}}
                         </small>
+                    </td>
+                    <td>
+                      <p>"    "</p>
+                    </td>
                       <td colspan="2">{{chat.text}}</td>
                    
                 </tr>
