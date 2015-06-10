@@ -24,6 +24,7 @@ function chatCtrl($rootScope, $http) {
    ***/
   $rootScope.chatChannel = "angular_chat";
   $rootScope.messageLimit = 50;
+  $rootScope.usernameLimit = 8;
   $rootScope.defaultUsername = "";
 
   /***
