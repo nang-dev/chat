@@ -148,7 +148,7 @@ function chatCtrl($rootScope, $http) {
     $rootScope.message.text = $rootScope.message.text.replaceAll("peace()", "✌");
     $rootScope.message.text = $rootScope.message.text.replaceAll("dog()", "🐶");
     $rootScope.message.text = $rootScope.message.text.replaceAll("banana()", "🍌");
-    $rootScope.message.text = $rootScope.message.text.replaceAll("shit()", "💩�");
+    $rootScope.message.text = $rootScope.message.text.replaceAll("shit()", "💩");
 
 
     //set the message date
