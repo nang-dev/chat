@@ -123,7 +123,7 @@ function chatCtrl($rootScope, $http) {
         /*
     Handle the emoji replacements
     */
-    $rootScope.message.text = $rootScope.message.text.replaceAll(">:(, "😦");
+    $rootScope.message.text = $rootScope.message.text.replaceAll(">:(", "😦");
     $rootScope.message.text = $rootScope.message.text.replaceAll(">:)", "😈");
     $rootScope.message.text = $rootScope.message.text.replaceAll(":)", "😊");
     $rootScope.message.text = $rootScope.message.text.replaceAll(":D", "😃");
