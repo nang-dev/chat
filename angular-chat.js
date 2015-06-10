@@ -33,6 +33,8 @@ function chatCtrl($rootScope, $http) {
   $rootScope.errorMsg;
   $rootScope.realtimeStatus = 0;
 
+
+  
   /***
    * Purpose: clear the message object
    * Precondition: none
@@ -128,6 +130,7 @@ function chatCtrl($rootScope, $http) {
     });
 
     $rootScope.message.text = "";
+    $rootScope.message.text = $rootScope.message.text + "\n" + "---------------------";
   };
 
   /***
