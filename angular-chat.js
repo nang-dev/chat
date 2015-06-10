@@ -139,7 +139,7 @@ function chatCtrl($rootScope, $http) {
     $rootScope.message.text = $rootScope.message.text.replaceAll("<3", "💜");
     $rootScope.message.text = $rootScope.message.text.replaceAll("</3", "💔");
     
-    $rootScope.message.text = $rootScope.message.text + "/n" + "----------------------------------------";
+   // $rootScope.message.text = $rootScope.message.text + "\n" + "----------------------------------------";
 
 
     //set the message date
