@@ -123,7 +123,7 @@ function chatCtrl($rootScope, $http) {
         /*
     Handle the emoji replacements
     */
-    $rootScope.message.text = $rootScope.message.text.replaceAll(">:(", "😡");
+    $rootScope.message.text = $rootScope.message.text.replaceAll(">:(", "😠");�
     $rootScope.message.text = $rootScope.message.text.replaceAll(">:)", "😈");
     $rootScope.message.text = $rootScope.message.text.replaceAll(":)", "😊");
     $rootScope.message.text = $rootScope.message.text.replaceAll(":D", "😃");
@@ -136,9 +136,15 @@ function chatCtrl($rootScope, $http) {
     $rootScope.message.text = $rootScope.message.text.replaceAll(":'D", "😂");
     $rootScope.message.text = $rootScope.message.text.replaceAll(":|", "😁");
     $rootScope.message.text = $rootScope.message.text.replaceAll(":*", "😘");
+    $rootScope.message.text = $rootScope.message.text.replaceAll(":(", "😟");
     $rootScope.message.text = $rootScope.message.text.replaceAll("<3", "💜");
     $rootScope.message.text = $rootScope.message.text.replaceAll("</3", "💔");
-    
+    $rootScope.message.text = $rootScope.message.text.replaceAll("watermellon()", "🍉");
+    $rootScope.message.text = $rootScope.message.text.replaceAll("knife()", "🔪");
+    $rootScope.message.text = $rootScope.message.text.replaceAll("money()", "💵");
+    $rootScope.message.text = $rootScope.message.text.replaceAll("peace()", "✌");
+    $rootScope.message.text = $rootScope.message.text.replaceAll("dog()", "🐶");
+    $rootScope.message.text = $rootScope.message.text.replaceAll("banana()", "🍌");
    // $rootScope.message.text = $rootScope.message.text + "\n" + "----------------------------------------";
 
 
