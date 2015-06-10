@@ -1,221 +1,126 @@
-/***
- * File: angular-chat.js
- * Author: Jade Krafsig
- * Source: design1online.com, LLC
- * License: GNU Public License
- ***/
+<!doctype html>
+<html ng-app="angular_chat">
+  <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.4.0.js"></script>
+    <div pub-key="pub-c-bc1da37d-273c-435a-9a21-a985367403dc" sub-key="sub-c-bfc0aa26-0e32-11e5-a5c2-0619f8945a4f" ssl="off" origin="pubsub.pubnub.com" id="pubnub"></div>
+    <script src="http://cdn.pubnub.com/pubnub-3.1.min.js"></script>
+    <script src="angular-chat.js"></script>
+     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bootstrap.css">
 
-/***
- * Purpose: load bootstrap ui angular modules
- * Precondition: none
- * Postcondition: modules loaded
- ***/
-angular.module('angular_chat', ['ui.bootstrap']);
-
-/***
- * Purpose: load the existing chat logs
- * Precondition: none
- * Postcondition: chat logs have been loaded
- ***/
-function chatCtrl($rootScope, $http) { 
-
-  /***
-   * Configurable global variables
-   ***/
-  $rootScope.chatChannel = "angular_chat";
-  $rootScope.messageLimit = 50;
-  $rootScope.usernameLimit = 8;
-  $rootScope.defaultUsername = "";
-
-  /***
-   * Static global variables
-   ***/
-  $rootScope.loggedIn = false;
-  $rootScope.errorMsg;
-  $rootScope.realtimeStatus = 0;
+  <script src="jquery-1.11.3.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="jquery.js"></script>
+    <meta charset="utf-8">
+    <title>Chat Server</title>
+    <link rel="icon" type="image/png" href="http://iconshow.me/media/images/ui/ios7-icons/png/512/chatbubble-working.png">
 
 
-  
-  /***
-   * Purpose: clear the message object
-   * Precondition: none
-   * Postcondition: message object has been reset
-   ***/
-  $rootScope.clearMsg = function() {
-    $rootScope.message = {
-      username: $rootScope.defaultUsername,
-      email: 'n/a',
-      text: ''
-    };
-  }
+  </head>
+  <body>
+  <div class='container-fluid' ng-controller="chatCtrl">
+    <div class = "container">
+        <div class = "row">
+          <div class = "col-lg-16">
+            <div class="jumbotron">
+              <h1>Nathan's Chat Server</h1>
+              <p>Using AngularJS and PubNub</p>
+            </div>
+            
+            
+            <div>
 
-  $rootScope.clearMsg();
+                <p>&nbsp;</p>
+                <div ng-show="realtimeStatus == 0">
+                 <span><h2 class="text-danger">Disconnected...</h2></span>
+                </div>
+                <div ng-show="realtimeStatus == 1">
+                  <span><h2 class="text-info">Connecting...</h2></span>
+                </div>
+                <div ng-show="realtimeStatus == 2">
+                  <span><h2 class="text-success">Connection Successful</h2></span>
+                </div>
+                
+              <div class="alert alert-dismissible alert-info">
+  							<button type="button" class="close" data-dismiss="alert">×</button>
+  							Most Recent Messages Will Appear at the Top of the Chat Box
+  						</div>
+               <div class="alert alert-dismissible alert-danger">
+  							<button type="button" class="close" data-dismiss="alert">×</button>
+  							NEW UPDATE: Emojis Included: Aside from typable faces, use emojis by typing "()" after the emoji name! Ex. I love watermelon()
+  						</div>
+                <div ng-show="loggedIn" id="logout">
+                  <span ng-click="attemptLogout()"><a class="btn btn-warning">Log Out</a></span>
+                </div>
+              </div>
+              <p>&nbsp;</p>
+              <div ng-show="errorMsg">
+                <i></i> <h3>Error: {{errorMsg}}</h3>
+              </div>
+            
+            
+            <div ng-Show="!loggedIn" id="login">
+              <h2>Login</h2>
+              
+              <div class="form-group">
+                <label class="control-label" for="username">Username</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" id="txtSearch1" ng-model="message.username" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch1').click()" />
+                  
+                  
 
-  /***
-   * Purpose: load the existing chat logs
-   * Precondition: none
-   * Postcondition: chat logs have been loaded
-   ***/
-  $rootScope.chatLogs = function() {
-    PUBNUB.history( {
-      channel : $rootScope.chatChannel,
-      limit   : $rootScope.messageLimit
-    }, function(messages) {
-      // Shows All Messages
-      $rootScope.$apply(function(){
-        $rootScope.chatMessages = messages;          
-      }); 
-    });
-   }
+                  
+                  <span class="input-group-btn" ng-click="attemptLogin()">
+                    <button class="btn btn-success" type="button" id="btnSearch1">Go Chat</button>
+                  </span>
+                </div>
+              </div>
 
-  /***
-   * Purpose: load the existing chat logs
-   * Precondition: none
-   * Postcondition: chat logs have been loaded
-   ***/
-   $rootScope.attemptLogin = function() {
-    $rootScope.errorMsg = "";
+            </div>
+            
+            <div ng-Show="loggedIn" id="chat">
+                
+              <table>
+                <tr ng-repeat="chat in chatMessages">
+                    <td>
+                  
+                    <b id="temp">{{chat.username}}</b></br>
+                      <script type="text/javascript"> 
+                     
 
-    if (!$rootScope.message.username) {
-      $rootScope.errorMsg = "You must enter a username.";
-      return;
-    }
+                     </script>
+                        <small class="text-muted">
+                         {{chat.date}} </br> {{chat.time}}
+                        </small>
+                    </td>
 
-    if (!$rootScope.realtimeStatus) {
-      $rootScope.errorMsg = "You're not connect to PubNub.";
-      return;
-    }
+                      <td colspan="2" class="text-primary">{{chat.text}}</td>
+                   
+                </tr>
+                <tr ng-show="chatMessages.length == 0">
+                  <td colspan="3">No messages yet!</td>
+                </tr>
+              </table>
+            </div>
+            <form ng-Show="loggedIn" ui-keypress="{13:'postMessage()'}">
+              <div class="form-group">
+                <div id="inputMessage" class="input-group">
+                  <input type="text" class="form-control" placeholder="Type Message Here" ng-model="message.text" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch2').click()">
+                  <span class="input-group-btn" ng-click="postMessage()">
+                    <button class="btn btn-success" type="button" id="btnSearch2">Send</button>
+                  </span>
+                </div>
+              </div>
+            </form>
+            
+      
 
-    $rootScope.loggedIn = true;
-   }
-
-  /***
-   * Purpose: remove error message formatting when the message input changes
-   * Precondition: none
-   * Postcondition: error message class removed from message input
-   ***/
-  $rootScope.$watch('message.text', function(newValue, oldValue) {
-    if (newValue)
-      $("#inputMessage").removeClass("error");
-      $rootScope.errorMsg = "";
-  }, true);
-
-  /***
-   * Purpose: trying to post a message to the chat
-   * Precondition: loggedIn
-   * Postcondition: message added to chatMessages and sent to chatLog
-   ***/
-  $rootScope.postMessage = function() {
-
-    //make sure they are logged in
-    if (!$rootScope.loggedIn) {
-      $rootScope.errorMsg = "You must login first.";
-      return;
-    }
-
-    //make sure they enter a chat message
-    if (!$rootScope.message.text) {
-      $rootScope.errorMsg = "You must enter a message.";
-      $("#inputMessage").addClass("error");
-      return;
-    }
-
-
-        /*
-    Handle the emoji replacements
-    */
-    $rootScope.message.text = $rootScope.message.text.replaceAll(">:)", "😈");
-    $rootScope.message.text = $rootScope.message.text.replaceAll(":)", "😊");
-    $rootScope.message.text = $rootScope.message.text.replaceAll(":D", "😃");
-    $rootScope.message.text = $rootScope.message.text.replaceAll(":o", "😱");
-    $rootScope.message.text = $rootScope.message.text.replaceAll(":O", "😱");
-    $rootScope.message.text = $rootScope.message.text.replaceAll(":p", "😛");
-    $rootScope.message.text = $rootScope.message.text.replaceAll(":P", "😛");
-    $rootScope.message.text = $rootScope.message.text.replaceAll(":')", "😅");
-    $rootScope.message.text = $rootScope.message.text.replaceAll(":'(", "😢");
-    $rootScope.message.text = $rootScope.message.text.replaceAll(":'D", "😂");
-    $rootScope.message.text = $rootScope.message.text.replaceAll(":|", "😁");
-    $rootScope.message.text = $rootScope.message.text.replaceAll(":*", "😘");
-    $rootScope.message.text = $rootScope.message.text.replaceAll(":(", "😟");
-    $rootScope.message.text = $rootScope.message.text.replaceAll("<3", "💜");
-    $rootScope.message.text = $rootScope.message.text.replaceAll("</3", "💔");
-    $rootScope.message.text = $rootScope.message.text.replaceAll("watermelon()", "🍉");
-    $rootScope.message.text = $rootScope.message.text.replaceAll("knife()", "🔪");
-    $rootScope.message.text = $rootScope.message.text.replaceAll("money()", "💵");
-    $rootScope.message.text = $rootScope.message.text.replaceAll("peace()", "✌");
-    $rootScope.message.text = $rootScope.message.text.replaceAll("dog()", "🐶");
-    $rootScope.message.text = $rootScope.message.text.replaceAll("banana()", "🍌");
-    $rootScope.message.text = $rootScope.message.text.replaceAll("shit()", "💩�");
-
-
-    //set the message date
-    d = new Date();
-    $rootScope.message.date = d.getDay() + "/" + d.getMonth() + "/" + d.getFullYear();
-    $rootScope.message.time = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
-
-   PUBNUB.publish({
-      channel : $rootScope.chatChannel,
-      message : $rootScope.message
-    });
-
-    $rootScope.message.text = "";
+            
    
-  };
-
-  /***
-   * Purpose: connect and access pubnub channel
-   * Preconditions: pubnub js file init
-   * Postconditions: pubnub is waiting and ready
-   ***/
-  PUBNUB.subscribe({
-    channel    : $rootScope.chatChannel,
-    restore    : false, 
-    callback   : function(message) { 
-      //update messages with the new message
-      $rootScope.$apply(function(){
-        $rootScope.chatMessages.unshift(message);          
-      }); 
-    },
-
-    error      : function(data) {
-      $rootScope.errorMsg = data;
-    },
-
-    disconnect : function() {   
-      $rootScope.$apply(function(){
-        $rootScope.realtimeStatus = 0;
-      });
-    },
-
-    reconnect  : function() {   
-      $rootScope.$apply(function(){
-        $rootScope.realtimeStatus = 1;
-      });
-    },
-
-    connect    : function() {
-      $rootScope.$apply(function(){
-        $rootScope.realtimeStatus = 2;
-        //load the chat logs
-        $rootScope.chatLogs();
-      });
-    }
-  });
-
-  /***
-   * Purpose: trying to post a message to the chat
-   * Precondition: loggedIn
-   * Postcondition: message added to chatMessages and sent to chatLog
-   ***/
-  $rootScope.attemptLogout = function() {
-    $("#inputMessage").removeClass("error");
-    $rootScope.clearMsg();
-    $rootScope.loggedIn = false;
-  }
-  String.prototype.replaceAll = function(search, replace) {
-      if (replace === undefined) {
-          return this.toString();
-      }
-      return this.split(search).join(replace);
-  }
-}
+          </div>
+       </div>
+      </div>
+  </body>
+</html>
