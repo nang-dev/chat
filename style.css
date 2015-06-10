@@ -15,3 +15,6 @@
   float: right;
   margin-top: -1.2em;
 }
+small { 
+    font-size: smaller;
+}
