@@ -184,11 +184,19 @@ optgroup {
 }
 table {
   border-collapse: collapse;
-  border-spacing: 0;
+  border-spacing: 0px;
 }
-td,
+td {
+  padding: 4px;
+}
+
 th {
-  padding: 0;
+  padding: 0px;
+}
+
+
+tr {
+  padding: 3px;
 }
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {
