@@ -1,11 +1,4 @@
 /***
- * File: angular-chat.js
- * Author: Jade Krafsig
- * Source: design1online.com, LLC
- * License: GNU Public License
- ***/
-
-/***
  * Purpose: load bootstrap ui angular modules
  * Precondition: none
  * Postcondition: modules loaded
