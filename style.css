@@ -1,5 +1,13 @@
+body {
+  letter-spacing: 0.2rem;
+}
+
+h1,h2,h3,h4,h5,h6,p {
+  font-family: 'Montserrat', sans-serif;
+}
+
 #chat {
- height: 33em; 
+ height: 33em;
  overflow: auto;
  background-color: #DBE9FF;
  border-radius: .25em;
@@ -15,6 +23,18 @@
   float: right;
   margin-top: -1.2em;
 }
-small { 
+small {
     font-size: smaller;
+}
+
+.hero {
+  color:white;
+  background-color: #415F9D;
+  box-shadow: 0 20px 40px 0 rgba(0,0,0,0.10);
+}
+
+.hero p {
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  opacity:0.8;
 }

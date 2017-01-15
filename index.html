@@ -7,15 +7,15 @@
     <div pub-key="pub-c-bc1da37d-273c-435a-9a21-a985367403dc" sub-key="sub-c-bfc0aa26-0e32-11e5-a5c2-0619f8945a4f" ssl="off" origin="pubsub.pubnub.com" id="pubnub"></div>
     <script src="http://cdn.pubnub.com/pubnub-3.1.min.js"></script>
     <script src="angular-chat.js"></script>
-     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link rel="stylesheet" href="bootstrap.css">
-
+    <link rel="stylesheet" href="style.css">
   <script
   src="https://code.jquery.com/jquery-3.1.1.min.js"
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-   
+
     <meta charset="utf-8">
     <title>Chat Server</title>
     <link rel="icon" type="image/png" href="http://iconshow.me/media/images/ui/ios7-icons/png/512/chatbubble-working.png">
@@ -27,12 +27,12 @@
     <div class = "container">
         <div class = "row">
           <div class = "col-lg-16">
-            <div class="jumbotron">
+            <div class="jumbotron hero">
               <h1>Motivate's Chat Server</h1>
               <p>Using AngularJS and PubNub API</p>
             </div>
-            
-            
+
+
             <div>
 
                 <p>&nbsp;</p>
@@ -45,17 +45,17 @@
                 <div ng-show="realtimeStatus == 2">
                   <span><h2 class="text-success">Connection Successful</h2></span>
                 </div>
-                
+
               <div class="alert alert-dismissible alert-info">
   							<button type="button" class="close" data-dismiss="alert">×</button>
   							Most Recent Messages Will Appear at the Top of the Chat Box
   						</div>
-           
+
                 <div ng-show="loggedIn" id="logout">
                 	<a ng-click="setRoom('All')" class="btn btn-warning">All</a></span>
                 	<a ng-click="setRoom('Academic')" class="btn btn-warning">Academic</a></span>
                 	<a ng-click="setRoom('Personal')" class="btn btn-warning">Personal</a></span>
-                	<a ng-click="setRoom('Other')" class="btn btn-warning">Other</a></span> 
+                	<a ng-click="setRoom('Other')" class="btn btn-warning">Other</a></span>
                   <span ng-click="attemptLogout()"><a class="btn btn-warning">Log Out</a></span>
                 </div>
               </div>
@@ -63,19 +63,19 @@
               <div ng-show="errorMsg">
                 <i></i> <h3>Error: {{errorMsg}}</h3>
               </div>
-            
-            
+
+
             <div ng-Show="!loggedIn" id="login">
               <h2>Login</h2>
-              
+
               <div class="form-group">
                 <label class="control-label" for="username">Username</label>
                 <div class="input-group">
                   <input type="text" class="form-control" id="txtSearch1" ng-model="message.username" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch1').click()" />
-                  
-                  
 
-                  
+
+
+
                   <span class="input-group-btn" ng-click="attemptLogin()">
                     <button class="btn btn-success" type="button" id="btnSearch1">Enter Chatroom</button>
                   </span>
@@ -83,16 +83,16 @@
               </div>
 
             </div>
-            
+
             <div ng-Show="loggedIn" id="chat">
-                
+
               <table>
                 <tr ng-repeat="chat in chatMessages">
                     <td>
-                  
+
                     <b id="temp">{{chat.username}}</b></br>
-                      <script type="text/javascript"> 
-                     
+                      <script type="text/javascript">
+
 
                      </script>
                         <small class="text-muted">
@@ -101,7 +101,7 @@
                     </td>
 
                       <td colspan="2" class="text-primary">{{chat.text}}</td>
-                   
+
                 </tr>
                 <tr ng-show="chatMessages.length == 0">
                   <td colspan="3">No messages yet!</td>
@@ -118,11 +118,11 @@
                 </div>
               </div>
             </form>
-            
-      
 
-            
-   
+
+
+
+
           </div>
        </div>
       </div>
