@@ -15,11 +15,11 @@ function chatCtrl($rootScope, $http) {
   /***
    * Configurable global variables
    ***/
-  $rootScope.chatChannel = "angular_chat";
+  $rootScope.chatChannel = "All";
   $rootScope.messageLimit = 50;
   $rootScope.usernameLimit = 8;
-  $rootScope.defaultUsername = "";
-
+  $rootScope.defaultUsername = "hi";
+  $rootScope.room = "All";
   /***
    * Static global variables
    ***/
@@ -27,7 +27,7 @@ function chatCtrl($rootScope, $http) {
   $rootScope.errorMsg;
   $rootScope.realtimeStatus = 0;
 
-
+ 
   
   /***
    * Purpose: clear the message object
@@ -120,6 +120,7 @@ function chatCtrl($rootScope, $http) {
         /*
     Handle the emoji replacements
     */
+    $rootScope.message.text =  $rootScope.message.text + $rootScope.chatChannel
     $rootScope.message.text = $rootScope.message.text.replaceAll(">:(", "😡");
     $rootScope.message.text = $rootScope.message.text.replaceAll(">:)", "😈");
     $rootScope.message.text = $rootScope.message.text.replaceAll(":)", "😊");
@@ -186,7 +187,7 @@ function chatCtrl($rootScope, $http) {
     d = new Date();
     $rootScope.message.date = d.getDay() + "/" + d.getMonth() + "/" + d.getFullYear();
     $rootScope.message.time = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
-
+    $rootScope.message.room = $rootScope.room;
    PUBNUB.publish({
       channel : $rootScope.chatChannel,
       message : $rootScope.message
@@ -235,7 +236,46 @@ function chatCtrl($rootScope, $http) {
       });
     }
   });
+   $rootScope.setRoom = function(room) {
 
+    $rootScope.clearMsg();
+    $rootScope.chatChannel = room;
+    PUBNUB.subscribe({
+    channel    : $rootScope.chatChannel,
+    restore    : false, 
+    callback   : function(message) { 
+      //update messages with the new message
+      $rootScope.$apply(function(){
+        $rootScope.chatMessages.unshift(message);          
+      }); 
+    },
+
+    error      : function(data) {
+      $rootScope.errorMsg = data;
+    },
+
+    disconnect : function() {   
+      $rootScope.$apply(function(){
+        $rootScope.realtimeStatus = 0;
+      });
+    },
+
+    reconnect  : function() {   
+      $rootScope.$apply(function(){
+        $rootScope.realtimeStatus = 1;
+      });
+    },
+
+    connect    : function() {
+      $rootScope.$apply(function(){
+        $rootScope.realtimeStatus = 2;
+        //load the chat logs
+        $rootScope.chatLogs();
+      });
+    }
+  });
+    
+  }
   /***
    * Purpose: trying to post a message to the chat
    * Precondition: loggedIn
