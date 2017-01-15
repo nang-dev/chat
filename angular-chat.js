@@ -18,7 +18,7 @@ function chatCtrl($rootScope, $http) {
   $rootScope.chatChannel = "All";
   $rootScope.messageLimit = 50;
   $rootScope.usernameLimit = 8;
-  $rootScope.defaultUsername = "hi";
+  $rootScope.defaultUsername = "";
   $rootScope.room = "All";
   /***
    * Static global variables
@@ -120,7 +120,7 @@ function chatCtrl($rootScope, $http) {
         /*
     Handle the emoji replacements
     */
-    $rootScope.message.text =  $rootScope.message.text + $rootScope.chatChannel
+    //$rootScope.message.text =  $rootScope.message.text + $rootScope.chatChannel
     $rootScope.message.text = $rootScope.message.text.replaceAll(">:(", "😡");
     $rootScope.message.text = $rootScope.message.text.replaceAll(">:)", "😈");
     $rootScope.message.text = $rootScope.message.text.replaceAll(":)", "😊");
