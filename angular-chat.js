@@ -238,7 +238,7 @@ function chatCtrl($rootScope, $http) {
   });
    $rootScope.setRoom = function(room) {
 
-    $rootScope.clearMsg();
+    //$rootScope.clearMsg();
     $rootScope.chatChannel = room;
     PUBNUB.subscribe({
     channel    : $rootScope.chatChannel,
